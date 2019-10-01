@@ -1,0 +1,12 @@
+server.port: 8085
+
+spring:
+  jpa:
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/Book_Review?serverTimezone=UTC
+    username: book-reviewAdmin1
+    password: book-reviewAdmin1

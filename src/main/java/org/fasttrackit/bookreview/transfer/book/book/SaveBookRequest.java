@@ -1,17 +1,9 @@
-package org.fasttrackit.bookreview.domain;
+package org.fasttrackit.bookreview.transfer.book.book;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class Book {
+public class SaveBookRequest {
 
-    @Id
-    @GeneratedValue
-    private long id;
-    @NotNull
     private String title;
     @NotNull
     private String author;
@@ -24,17 +16,7 @@ public class Book {
     @NotNull
     private String description;
     private int pages;
-    private int rank;
-    private int likes;
     private String imagePath;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -92,22 +74,6 @@ public class Book {
         this.pages = pages;
     }
 
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
     public String getImagePath() {
         return imagePath;
     }
@@ -118,17 +84,14 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+        return "SaveBookRequest{" +
+                "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", yearOfRelease=" + yearOfRelease +
                 ", language='" + language + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", pages=" + pages +
-                ", rank=" + rank +
-                ", likes=" + likes +
                 ", imagePath='" + imagePath + '\'' +
                 '}';
     }
