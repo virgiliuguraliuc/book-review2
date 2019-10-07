@@ -3,13 +3,18 @@ package org.fasttrackit.bookreview;
 
 import org.fasttrackit.bookreview.domain.Book;
 import org.fasttrackit.bookreview.exception.ResourceNotFoundException;
+import org.fasttrackit.bookreview.persistance.BookRepository;
 import org.fasttrackit.bookreview.service.BookService;
 import org.fasttrackit.bookreview.steps.BookSteps;
+import org.fasttrackit.bookreview.transfer.book.book.GetBookRequest;
 import org.fasttrackit.bookreview.transfer.book.book.SaveBookRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -33,22 +38,36 @@ public class BookServiceIntegrationTests {
     @Test
     public void TestGetBook_whenExistingEntity_thenReturnBook(){
         Book createdBook = bookSteps.createBook();
-        Book retirevedBook = bookService.getBook(createdBook.getId());
+        Book retrievedBook = bookService.getBook(createdBook.getId());
 
-        assertThat(retirevedBook, notNullValue());
-        assertThat(retirevedBook.getId(), is(createdBook.getId()));
-        assertThat(retirevedBook.getTitle(),is(createdBook.getTitle()));
-        assertThat(retirevedBook.getType(), is(createdBook.getType()));
-        assertThat(retirevedBook.getAuthor(), is(createdBook.getAuthor()));
-        assertThat(retirevedBook.getYearOfRelease(), is(createdBook.getYearOfRelease()));
-        assertThat(retirevedBook.getLanguage(), is(createdBook.getLanguage()));
-        assertThat(retirevedBook.getPages(), is(createdBook.getPages()));
-        assertThat(retirevedBook.getDescription(), is(createdBook.getDescription()));
-        assertThat(retirevedBook.getImagePath(), is(createdBook.getImagePath()));
+        assertThat(retrievedBook, notNullValue());
+        assertThat(retrievedBook.getId(), is(createdBook.getId()));
+        assertThat(retrievedBook.getTitle(),is(createdBook.getTitle()));
+        assertThat(retrievedBook.getType(), is(createdBook.getType()));
+        assertThat(retrievedBook.getAuthor(), is(createdBook.getAuthor()));
+        assertThat(retrievedBook.getYearOfRelease(), is(createdBook.getYearOfRelease()));
+        assertThat(retrievedBook.getLanguage(), is(createdBook.getLanguage()));
+        assertThat(retrievedBook.getPages(), is(createdBook.getPages()));
+        assertThat(retrievedBook.getDescription(), is(createdBook.getDescription()));
+        assertThat(retrievedBook.getImagePath(), is(createdBook.getImagePath()));
     }
     @Test(expected = ResourceNotFoundException.class)
     public void TestGetBookById_whenNonExistingEntity_thenThrowNotFoundException(){
        bookService.getBook(99999999L);
+    }
+
+    @Test
+    public void TestGetBooksByTitleandAuthor_whenValidRequest(){
+       Book createdBook = bookSteps.createBook();
+       GetBookRequest request= new GetBookRequest();
+       request.setPartialAuthor(createdBook.getAuthor());
+       request.setpartialTitle(createdBook.getTitle());
+
+
+        Page<Book> books = bookService.getBooks(request, Pageable.unpaged());
+
+        assertThat(books.iterator().next().getAuthor(), is(createdBook.getAuthor()));
+        assertThat(books.iterator().next().getTitle(), is(createdBook.getTitle()));
     }
 
     @Test

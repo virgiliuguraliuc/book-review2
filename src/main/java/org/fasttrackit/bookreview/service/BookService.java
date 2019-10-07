@@ -55,7 +55,7 @@ public class BookService {
             return bookRepository.findByTitleAndAuthor(request.getpartialTitle(), request.getPartialAuthor(), pageable);
         }
         else{
-            return bookRepository.findAll(pageable);
+            return bookRepository.findByTitleOrAuthor(request.getPartialAuthor(), pageable);
         }
     }
 

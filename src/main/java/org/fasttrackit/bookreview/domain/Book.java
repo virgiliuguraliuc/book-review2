@@ -3,7 +3,11 @@ package org.fasttrackit.bookreview.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -27,6 +31,9 @@ public class Book {
     private int rank;
     private int likes;
     private String imagePath;
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Cart> carts = new HashSet<>();
 
     public long getId() {
         return id;
@@ -116,6 +123,38 @@ public class Book {
         this.imagePath = imagePath;
     }
 
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id &&
+                yearOfRelease == book.yearOfRelease &&
+                pages == book.pages &&
+                rank == book.rank &&
+                likes == book.likes &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(language, book.language) &&
+                Objects.equals(type, book.type) &&
+                Objects.equals(description, book.description) &&
+                Objects.equals(imagePath, book.imagePath) &&
+                Objects.equals(carts, book.carts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, yearOfRelease, language, type, description, pages, rank, likes, imagePath, carts);
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -130,6 +169,7 @@ public class Book {
                 ", rank=" + rank +
                 ", likes=" + likes +
                 ", imagePath='" + imagePath + '\'' +
+                ", carts=" + carts +
                 '}';
     }
 }

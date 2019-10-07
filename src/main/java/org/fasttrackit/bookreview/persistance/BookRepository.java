@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long > {
 
-   // Page<Book> findByNameContaining(String partialTitle, Pageable pageable);
+
     Page<Book> findByTitleAndAuthor(String partialTitle, String partialAuthor, Pageable pageable);
 
 
     @Query(value = "SELECT product FROM Product product where name Like '%?%'",
             nativeQuery= true)
-    List<Book> findByPartialName(String partialName);
+    Page<Book> findByTitleOrAuthor(String partialTitle, Pageable pageable);
 
 
 }
