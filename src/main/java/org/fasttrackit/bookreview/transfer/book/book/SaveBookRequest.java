@@ -17,6 +17,7 @@ public class SaveBookRequest {
     private String description;
     private int pages;
     private String imagePath;
+    private Double price;
 
     public String getTitle() {
         return title;
@@ -82,6 +83,14 @@ public class SaveBookRequest {
         this.imagePath = imagePath;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "SaveBookRequest{" +
@@ -93,6 +102,7 @@ public class SaveBookRequest {
                 ", description='" + description + '\'' +
                 ", pages=" + pages +
                 ", imagePath='" + imagePath + '\'' +
+                ", price=" + price +
                 '}';
     }
 }

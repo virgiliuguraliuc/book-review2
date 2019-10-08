@@ -49,7 +49,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
+    public void deleteUser(long id){
+        LOGGER.info("deleting book {}", id);
+        userRepository.deleteById(id);
+    }
 
 
 }

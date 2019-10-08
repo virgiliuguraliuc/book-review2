@@ -26,6 +26,7 @@ public class BookSteps {
         request.setType("SelfImprovement");
         request.setLanguage("english");
         request.setYearOfRelease(1998);
+        request.setPrice(10.0);
 
 
         Book book = bookService.createBook(request);
@@ -41,6 +42,7 @@ public class BookSteps {
         assertThat(book.getType(), is(request.getType()));
         assertThat(book.getLanguage(), is(request.getLanguage()));
         assertThat(book.getYearOfRelease(), is(request.getYearOfRelease()));
+        assertThat(book.getPrice(), is(request.getPrice()));
 
 
         return book;}

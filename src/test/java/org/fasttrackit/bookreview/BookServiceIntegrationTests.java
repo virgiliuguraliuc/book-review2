@@ -50,6 +50,7 @@ public class BookServiceIntegrationTests {
         assertThat(retrievedBook.getPages(), is(createdBook.getPages()));
         assertThat(retrievedBook.getDescription(), is(createdBook.getDescription()));
         assertThat(retrievedBook.getImagePath(), is(createdBook.getImagePath()));
+        assertThat(retrievedBook.getPrice(), is(createdBook.getPrice()));
     }
     @Test(expected = ResourceNotFoundException.class)
     public void TestGetBookById_whenNonExistingEntity_thenThrowNotFoundException(){
@@ -57,7 +58,7 @@ public class BookServiceIntegrationTests {
     }
 
     @Test
-    public void TestGetBooksByTitleandAuthor_whenValidRequest(){
+    public void TestGetBooksByTitleAndAuthor_whenValidRequest(){
        Book createdBook = bookSteps.createBook();
        GetBookRequest request= new GetBookRequest();
        request.setPartialAuthor(createdBook.getAuthor());
@@ -83,6 +84,7 @@ public class BookServiceIntegrationTests {
         request.setDescription(createdBook.getDescription() + "updated");
         request.setImagePath(createdBook.getImagePath() + "updated");
         request.setType(createdBook.getType() + "updated");
+        request.setPrice(createdBook.getPrice() + 10);
 
         Book updatedBook = bookService.updateBook(createdBook.getId(), request);
         assertThat(updatedBook, notNullValue());
@@ -95,6 +97,7 @@ public class BookServiceIntegrationTests {
         assertThat(" unexpected Description ", updatedBook.getDescription(), is(request.getDescription()));
         assertThat(" unexpected Type ", updatedBook.getType(), is(request.getType()));
         assertThat(" unexpected ImagePath", updatedBook.getImagePath(), is(request.getImagePath()));
+        assertThat(" unexpected price", updatedBook.getPrice(), is(request.getPrice()));
     }
 
     @Test (expected = ResourceNotFoundException.class)

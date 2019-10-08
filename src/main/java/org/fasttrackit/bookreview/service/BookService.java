@@ -38,6 +38,7 @@ public class BookService {
         book.setImagePath(request.getImagePath());
         book.setType(request.getType());
         book.setYearOfRelease(request.getYearOfRelease());
+        book.setPrice(request.getPrice());
 
 
         return bookRepository.save(book);

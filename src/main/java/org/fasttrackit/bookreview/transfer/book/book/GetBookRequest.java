@@ -1,7 +1,7 @@
 package org.fasttrackit.bookreview.transfer.book.book;
 
 public class GetBookRequest {
-    private String  partialTitle;
+    private String partialTitle;
     private String partialAuthor; //Wrapper class accepts so it will also accept null
 
     public String getpartialTitle() {

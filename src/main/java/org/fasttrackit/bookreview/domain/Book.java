@@ -30,6 +30,16 @@ public class Book {
     private int pages;
     private int rank;
     private int likes;
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     private String imagePath;
 
     @ManyToMany(mappedBy = "books")
@@ -132,6 +142,25 @@ public class Book {
     }
 
     @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", yearOfRelease=" + yearOfRelease +
+                ", language='" + language + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", pages=" + pages +
+                ", rank=" + rank +
+                ", likes=" + likes +
+                ", price=" + price +
+                ", imagePath='" + imagePath + '\'' +
+                ", carts=" + carts +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -146,30 +175,13 @@ public class Book {
                 Objects.equals(language, book.language) &&
                 Objects.equals(type, book.type) &&
                 Objects.equals(description, book.description) &&
+                Objects.equals(price, book.price) &&
                 Objects.equals(imagePath, book.imagePath) &&
                 Objects.equals(carts, book.carts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, yearOfRelease, language, type, description, pages, rank, likes, imagePath, carts);
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", yearOfRelease=" + yearOfRelease +
-                ", language='" + language + '\'' +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                ", pages=" + pages +
-                ", rank=" + rank +
-                ", likes=" + likes +
-                ", imagePath='" + imagePath + '\'' +
-                ", carts=" + carts +
-                '}';
+        return Objects.hash(id, title, author, yearOfRelease, language, type, description, pages, rank, likes, price, imagePath, carts);
     }
 }
