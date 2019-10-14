@@ -1,49 +1,20 @@
-package org.fasttrackit.bookreview.domain;
+package org.fasttrackit.bookreview.transfer.book.book;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-@Entity
-public class Book {
+public class BookResponse {
 
-    @Id
-    @GeneratedValue
     private long id;
-    @NotNull
     private String title;
-    @NotNull
     private String author;
-    @NotNull
     private int yearOfRelease;
-    @NotNull
     private String language;
-    @NotNull
     private String type;
-    @NotNull
     private String description;
     private int pages;
     private int rank;
     private int likes;
     private Double price;
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    private String imagePath;
-
-    @ManyToMany(mappedBy = "books")
-    private Set<Cart> carts = new HashSet<>();
 
     public long getId() {
         return id;
@@ -125,25 +96,17 @@ public class Book {
         this.likes = likes;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public Set<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookResponse{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
@@ -155,8 +118,6 @@ public class Book {
                 ", rank=" + rank +
                 ", likes=" + likes +
                 ", price=" + price +
-                ", imagePath='" + imagePath + '\'' +
-                ", carts=" + carts +
                 '}';
     }
 
@@ -164,21 +125,22 @@ public class Book {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return id == book.id &&
-                yearOfRelease == book.yearOfRelease &&
-                pages == book.pages &&
-                rank == book.rank &&
-                likes == book.likes &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(language, book.language) &&
-                Objects.equals(type, book.type) &&
-                Objects.equals(description, book.description) &&
-                Objects.equals(price, book.price) &&
-                Objects.equals(imagePath, book.imagePath) &&
-                Objects.equals(carts, book.carts);
+        BookResponse that = (BookResponse) o;
+        return id == that.id &&
+                yearOfRelease == that.yearOfRelease &&
+                pages == that.pages &&
+                rank == that.rank &&
+                likes == that.likes &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(author, that.author) &&
+                Objects.equals(language, that.language) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(price, that.price);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, yearOfRelease, language, type, description, pages, rank, likes, price);
+    }
 }

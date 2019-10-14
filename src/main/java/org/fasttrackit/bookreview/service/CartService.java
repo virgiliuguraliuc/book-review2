@@ -47,8 +47,8 @@ public class CartService {
         cart.addToCart(book);
         cartRepository.save(cart);
     }
-
-    public void getCart(Long userId) {
+    @Transactional
+    public CartResponse getCart(Long userId) {
         LOGGER.info(" retrieving cart for user " + userId);
         Cart cart = cartRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("there is no cart for user " + userId));
@@ -63,8 +63,9 @@ public class CartService {
             bookInCartResponse.setTitle(book.getTitle());
             bookInCartResponse.setPrice(book.getPrice());
 
+            cartResponse.getBooks().add(bookInCartResponse);
         }
-
+        return cartResponse;
     }
 
 

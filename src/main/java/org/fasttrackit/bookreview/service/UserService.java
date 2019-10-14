@@ -31,7 +31,7 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
-        user.setBookTokens(0.0);
+        user.setBookTokens(10.0);
 
         return userRepository.save(user);
     }

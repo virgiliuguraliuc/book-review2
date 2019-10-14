@@ -10,7 +10,7 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @NotNull
     private String firstName;
     @NotNull
@@ -23,11 +23,11 @@ public class User {
     private String password;
     private Double bookTokens;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

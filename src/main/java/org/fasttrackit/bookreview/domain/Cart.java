@@ -65,8 +65,5 @@ public class Cart {
                 Objects.equals(books, cart.books);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, user, books);
-    }
+
 }
