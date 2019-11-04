@@ -22,6 +22,11 @@ public class User {
     @NotNull
     private String password;
     private Double bookTokens;
+    private String address;
+    private String city;
+    private String postcode;
+    private String country;
+    private String phone;
 
     public Long getId() {
         return id;
@@ -79,6 +84,46 @@ public class User {
         this.bookTokens = bookTokens;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -88,7 +133,12 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", bookTokens='" + bookTokens + '\'' +
+                ", bookTokens=" + bookTokens +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", country='" + country + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 
@@ -97,17 +147,22 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(bookTokens, user.bookTokens);
+        return id.equals(user.id) &&
+                firstName.equals(user.firstName) &&
+                lastName.equals(user.lastName) &&
+                username.equals(user.username) &&
+                email.equals(user.email) &&
+                password.equals(user.password) &&
+                bookTokens.equals(user.bookTokens) &&
+                address.equals(user.address) &&
+                city.equals(user.city) &&
+                postcode.equals(user.postcode) &&
+                country.equals(user.country) &&
+                phone.equals(user.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, username, email, password, bookTokens);
+        return Objects.hash(id, firstName, lastName, username, email, password, bookTokens, address, city, postcode, country, phone);
     }
 }
